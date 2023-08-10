@@ -14,12 +14,13 @@ function App() {
 			timer = enableUpdate
 				? setInterval(() => setCount((prev) => prev + 1), 1000)
 				: 0;
-		} else if (status === 'stop') {
+		} else if (enableUpdate && status === 'stop') {
 			clearInterval(timer);
 		} else {
 			clearInterval(timer);
 			setCount(0);
 		}
+		return () => clearInterval(timer);
 	}, [status]);
 
 	return (
